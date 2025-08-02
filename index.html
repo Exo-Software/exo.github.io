@@ -1,38 +1,235 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Exo Software</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 20px;
-    }
-    .container {
-      text-align: left;
-    }
-    .logo {
-      display: block;
-      margin-bottom: 10px;
-    }
-    .tagline,
-    .contact-link {
-      font-family: Arial, sans-serif;
-      font-size: small;
-      margin: 5px 0;
-    }
-    .contact-link a {
-      text-decoration: underline;
-      color: blue;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exo | We Measure Embodied Intelligence</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --spacing-unit: min(3vw, 32px);
+            font-size: 16px;
+        }
+        
+        body {
+            font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: white;
+            color: black;
+            font-weight: 300;
+            line-height: 1.5;
+            padding: var(--spacing-unit);
+            overflow-x: hidden;
+            display: grid;
+            grid-template-columns: 1fr min(90ch, 100%) 1fr;
+        }
+        
+        body > * {
+            grid-column: 2;
+        }
+        
+        .container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        
+        .hero {
+            padding: calc(var(--spacing-unit) * 3) 0;
+            margin-top: calc(var(--spacing-unit) * 4);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1.5s ease, transform 1.5s ease;
+        }
+        
+        .brand {
+            font-size: clamp(3rem, 15vw, 8rem);
+            font-weight: 200;
+            letter-spacing: -0.05em;
+            line-height: 0.9;
+            margin-bottom: var(--spacing-unit);
+        }
+        
+        .tagline {
+            font-size: clamp(1.25rem, 5vw, 2rem);
+            font-weight: 300;
+            line-height: 1.2;
+            max-width: 25ch;
+            margin-left: calc(var(--spacing-unit) * 3);
+        }
+        
+        .description {
+            font-size: clamp(1rem, 3vw, 1.5rem);
+            max-width: 45ch;
+            margin-left: auto;
+            margin-right: calc(var(--spacing-unit) * 2);
+            padding: calc(var(--spacing-unit) * 2) 0;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1.5s ease 0.5s, transform 1.5s ease 0.5s;
+        }
+        
+        .cta {
+            margin-top: auto;
+            padding: calc(var(--spacing-unit) * 4) 0 calc(var(--spacing-unit) * 2);
+            text-align: right;
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            font-weight: 400;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1.5s ease 1s, transform 1.5s ease 1s;
+        }
+        
+        .cta a {
+            color: black;
+            text-decoration: none;
+            position: relative;
+            padding-bottom: 2px;
+        }
+        
+        .cta a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background-color: black;
+            transition: width 0.4s ease;
+        }
+        
+        .cta a:hover::after {
+            width: 100%;
+        }
+        
+        .cta .email-link {
+            color: black;
+            text-decoration: none;
+            position: relative;
+            padding-bottom: 2px;
+        }
+        
+        .cta .email-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background-color: black;
+            transition: width 0.4s ease;
+        }
+        
+        .cta .email-link:hover::after {
+            width: 100%;
+        }
+        
+        @media (min-width: 768px) {
+            body {
+                padding: calc(var(--spacing-unit) * 2);
+            }
+            
+            .description {
+                margin-top: calc(var(--spacing-unit) * 10);
+            }
+        }
+        
+        @media (max-width: 767px) {
+            .tagline {
+                margin-left: 0;
+            }
+            
+            .description {
+                margin-right: 0;
+                margin-top: calc(var(--spacing-unit) * 4);
+            }
+        }
+
+        /* Subtle dot cursor effect */
+        .cursor-dot {
+            position: fixed;
+            width: 8px;
+            height: 8px;
+            background-color: rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            transition: transform 0.1s ease;
+            z-index: 999;
+            opacity: 0;
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <img src="logo0.png" alt="Company Logo" class="logo">
-    <p class="tagline">Embodied AI today, not tomorrow</p>
-    <p class="contact-link"><a href="mailto:contact@exo.software">contact</a></p>
-  </div>
+    <div class="cursor-dot"></div>
+    <div class="container">
+        <section class="hero">
+            <h1 class="brand">Exo</h1>
+            <p class="tagline">We measure embodied intelligence.</p>
+        </section>
+        
+        <section class="description">
+            Automated evals-as-a-service for general-purpose robotics foundation models, giving researchers faster feedback-loops on real-world tasks.
+        </section>
+        
+        <section class="cta">
+            <a href="mailto:vishnu@exo.software" class="email-link">vishnu@exo.software</a> + <a href="mailto:jude@exo.software" class="email-link">jude@exo.software</a>
+        </section>
+    </div>
+
+    <script>
+        // Animate elements on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(() => {
+                document.querySelector('.hero').style.opacity = 1;
+                document.querySelector('.hero').style.transform = 'translateY(0)';
+            }, 100);
+            
+            setTimeout(() => {
+                document.querySelector('.description').style.opacity = 1;
+                document.querySelector('.description').style.transform = 'translateY(0)';
+            }, 400);
+            
+            setTimeout(() => {
+                document.querySelector('.cta').style.opacity = 1;
+                document.querySelector('.cta').style.transform = 'translateY(0)';
+            }, 700);
+        });
+
+        // Subtle cursor effect
+        const cursorDot = document.querySelector('.cursor-dot');
+        
+        document.addEventListener('mousemove', (e) => {
+            window.requestAnimationFrame(() => {
+                cursorDot.style.left = `${e.clientX}px`;
+                cursorDot.style.top = `${e.clientY}px`;
+                
+                if (parseFloat(cursorDot.style.opacity) < 1) {
+                    cursorDot.style.opacity = Math.min(parseFloat(cursorDot.style.opacity || 0) + 0.05, 1);
+                }
+            });
+        });
+        
+        document.addEventListener('mouseleave', () => {
+            cursorDot.style.opacity = 0;
+        });
+        
+        // Very subtle text tilt effect on mouse move (barely noticeable)
+        document.addEventListener('mousemove', (e) => {
+            const xPos = (e.clientX / window.innerWidth - 0.5) * 2; // -1 to 1
+            const yPos = (e.clientY / window.innerHeight - 0.5) * 2; // -1 to 1
+            
+            const brand = document.querySelector('.brand');
+            const tagline = document.querySelector('.tagline');
+            
+            brand.style.transform = `translateX(${xPos * 5}px) translateY(${yPos * 2}px)`;
+            tagline.style.transform = `translateX(${xPos * -3}px) translateY(${yPos * -1}px)`;
+        });
+    </script>
 </body>
 </html>
